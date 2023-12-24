@@ -1,0 +1,23 @@
+.nav_container {
+  border-bottom: 1px solid var(--color-slate-light);
+}
+
+.nav_container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: var(--color-theme-medium);
+}
+
+.author_link {
+  font-weight: 600;
+  font-size: small;
+  transition: color 300ms ease;
+}
+
+.author_link:hover {
+  color: var(--color-slate-dark);
+}

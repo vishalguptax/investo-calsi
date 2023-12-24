@@ -1,0 +1,47 @@
+.input_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.input_wrapper {
+  background-color: var(--color-theme-light);
+  border-radius: var(--input-radius);
+  height: 2.5rem;
+  width: 150px;
+  padding: 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--color-slate-darker);
+}
+
+.number_input {
+  background-color: transparent;
+  border-radius: var(--input-radius);
+  font-weight: 550;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  width: 100%;
+  color: var(--color-slate-darker);
+  /* font-size: medium; */
+  text-align: right;
+}
+
+.number_input::placeholder {
+  color: var(--color-slate-light);
+  opacity: 0.75;
+  font-size: small;
+}
+
+.range_input {
+  width: 100%;
+  accent-color: var(--color-slate-darker);
+}
+
+.label {
+  font-weight: 600;
+}
