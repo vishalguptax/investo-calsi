@@ -27,7 +27,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/shared/investmentStatsCard"
+    "components/shared/investment-stats-card"
   ],
   "exclude": ["node_modules"]
 }

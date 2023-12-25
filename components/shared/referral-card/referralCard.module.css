@@ -1,0 +1,46 @@
+.card {
+  background-color: var(--color-slate-white);
+  box-shadow: var(--shadow);
+}
+
+.card_header {
+  margin-bottom: 0.5rem;
+}
+
+.card_header p {
+  font-size: small;
+}
+
+.links {
+  display: flex;
+  width: 100%;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.links img {
+  width: 5.5rem;
+  background-position: center;
+  background-size: cover;
+  height: auto;
+}
+
+.links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .links {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .links {
+    gap: 1.25rem;
+  }
+}

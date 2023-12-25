@@ -47,15 +47,23 @@ body {
   background-color: var(--color-slate-white);
   -webkit-font-smoothing: antialiased;
   color: var(--color-slate-dark);
-  font-size: 14px;
-  line-height: 21px;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  line-height: normal;
+  line-height: 24px;
+}
+
+main {
+  flex: 1;
+  background: linear-gradient(
+    109.6deg,
+    rgb(245, 239, 249) 30.1%,
+    rgb(207, 211, 236) 100.2%
+  );
 }
 
 footer {
@@ -66,6 +74,11 @@ nav,
 footer,
 main {
   padding: 0.75rem 1rem;
+}
+
+ul,
+ol {
+  padding-left: 20px;
 }
 
 @media (min-width: 640px) {
@@ -80,7 +93,7 @@ main {
   nav,
   footer,
   main {
-    padding: 0.75rem 4rem;
+    padding: 0.75rem 3rem;
   }
 }
 
@@ -88,7 +101,7 @@ main {
   nav,
   footer,
   main {
-    padding: 0.75rem 6rem;
+    padding: 0.75rem 5rem;
   }
 }
 
@@ -96,7 +109,7 @@ main {
   nav,
   footer,
   main {
-    padding: 0.75rem 14rem;
+    padding: 0.75rem 10rem;
   }
 }
 
@@ -104,6 +117,6 @@ main {
   nav,
   footer,
   main {
-    padding: 0.75rem 22rem;
+    padding: 0.75rem 20rem;
   }
 }

@@ -7,17 +7,26 @@ export const Footer = () => {
     <footer className={styles.footer_container}>
       <div>
         Copyright © {new Date().getFullYear()}{" "}
-        <span className={styles.logo}>investoCalsi</span>
+        <span className={styles.logo}>
+          <Link href={"/"}>investoCalsi</Link>
+        </span>
       </div>
-      <Link href={"#"} className={styles.github_link}>
-        <Image
-          src={"./images/github-mark.svg"}
-          alt="github-icon"
-          width={16}
-          height={16}
-        />
-        Github Repo
-      </Link>
+      <div className={styles.footer_links}>
+        <Link href={"/about"}>About</Link> {" | "}
+        <Link
+          href={"https://github.com/vishalguptax/investo-calsi"}
+          target="_blank"
+          className={styles.github_link}
+        >
+          <Image
+            src={"./images/github-mark.svg"}
+            alt="github-icon"
+            width={16}
+            height={16}
+          />
+          Github Repo
+        </Link>
+      </div>
     </footer>
   );
 };

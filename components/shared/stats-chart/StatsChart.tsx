@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { InvestmentStatsType } from "../formContainer/FormContainer";
+import { InvestmentStatsType } from "../form-container/FormContainer";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -9,7 +9,7 @@ interface StatChartProp {
   data: InvestmentStatsType;
 }
 
-const StatChart = ({ data }: StatChartProp) => {
+const StatsChart = ({ data }: StatChartProp) => {
   const labels = ["Total Investment", "Total Returns"];
   const { totalValue, ...valueData } = data;
 
@@ -25,7 +25,11 @@ const StatChart = ({ data }: StatChartProp) => {
     ],
   };
 
-  return <Doughnut data={chartData} />;
+  return (
+    <div>
+      <Doughnut data={chartData} />
+    </div>
+  );
 };
 
-export default memo(StatChart);
+export default memo(StatsChart);

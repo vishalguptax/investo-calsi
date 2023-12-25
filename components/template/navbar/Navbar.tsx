@@ -5,8 +5,14 @@ export const Navbar = () => {
   return (
     <nav className={styles.nav_container}>
       <header>
-        <h1 className={styles.logo}>investoCalsi</h1>
-        <Link href={"#"} className={styles.author_link}>
+        <Link href={"/"}>
+          <h1 className={styles.logo}>investoCalsi</h1>
+        </Link>
+        <Link
+          href={"https://www.linkedin.com/in/vishalgupta26/"}
+          target="_blank"
+          className={styles.author_link}
+        >
           by Vishal Gupta
         </Link>
       </header>

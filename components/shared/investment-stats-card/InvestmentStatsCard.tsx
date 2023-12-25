@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card/Card";
-import { InvestmentStatsType } from "../formContainer/FormContainer";
+import { InvestmentStatsType } from "../form-container/FormContainer";
 import { formatNumber } from "@/utils/formatNumber";
 import styles from "./investmentStatsCard.module.css";
 export const InvestmentStatsCard = (data: InvestmentStatsType) => {

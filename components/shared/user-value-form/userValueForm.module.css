@@ -1,6 +1,7 @@
 .input_container {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   align-items: center;
   margin-bottom: 1rem;
 }
@@ -44,4 +45,20 @@
 
 .label {
   font-weight: 600;
+}
+
+@media (max-width: 340px) {
+  .input_container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .input_wrapper,
+  .number_input {
+    font-size: 16px;
+  }
+  .input_wrapper {
+    width: 120px;
+  }
 }
