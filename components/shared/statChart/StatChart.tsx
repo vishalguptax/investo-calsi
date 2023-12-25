@@ -25,11 +25,7 @@ const StatChart = ({ data }: StatChartProp) => {
     ],
   };
 
-  return (
-    <div>
-      <Doughnut data={chartData} />
-    </div>
-  );
+  return <Doughnut data={chartData} />;
 };
 
 export default memo(StatChart);

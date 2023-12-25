@@ -1,6 +1,6 @@
 import { FormContainer } from "@/components/shared/formContainer/FormContainer";
-
-export default function Home() {
+import { NiftyStats } from "@/components/shared/niftyStats/NiftyStats";
+export default async function Home() {
   return (
     <>
       <FormContainer />

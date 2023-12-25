@@ -1,11 +1,14 @@
 "use client";
 
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import debounce from "lodash/debounce";
 import styles from "./formContainer.module.css";
 import { InvestmentStatsCard } from "../investmentStatsCard/InvestmentStatsCard";
 import StatChart from "../statChart/StatChart";
 import UserValueForm from "../userValueForm/UserValueForm";
+import calculateSIP from "@/utils/calculateSIP";
+import Switcher from "@/components/ui/switcher/Switcher";
+import { calculateLumpsum } from "@/utils/calculateLumpsum";
+import { NiftyStats } from "../niftyStats/NiftyStats";
 
 export type InvestmentStatsType = {
   totalInvestment: number;
@@ -14,75 +17,71 @@ export type InvestmentStatsType = {
 };
 
 export const FormContainer = () => {
-  const [monthlyInvestment, setMonthlyInvestment] = useState(5000);
-  const [returnRate, setReturnRate] = useState(12);
-  const [duration, setDuration] = useState(15);
-  const [sipResult, setSipResult] = useState<InvestmentStatsType>({
+  const [mode, setMode] = useState<string>("sip");
+  const [investment, setInvestment] = useState<number>(5000);
+  const [returnRate, setReturnRate] = useState<number>(12);
+  const [duration, setDuration] = useState<number>(15);
+  const [result, setResult] = useState<InvestmentStatsType>({
     totalInvestment: 600000,
     totalReturns: 561695,
     totalValue: 1161695,
   });
-  const handleMonthlyInvestmentChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+  const handleModeChange = (value: string) => {
+    setMode(value);
+  };
+
+  const handleInvestmentChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10);
-    setMonthlyInvestment(newValue);
+    setInvestment(newValue);
+    calculateAndSetResult(newValue, returnRate, duration);
   };
 
   const handleRateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10);
     setReturnRate(newValue);
+    calculateAndSetResult(investment, newValue, duration);
   };
 
   const handleDurationChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10);
     setDuration(newValue);
+    calculateAndSetResult(investment, returnRate, newValue);
   };
 
-  const calculateSipResult = useMemo(
-    () =>
-      debounce(
-        (monthlyInvestment: number, returnRate: number, duration: number) => {
-          const P = monthlyInvestment;
-          const Y = duration;
-          const R = returnRate;
-          const n = Y * 12;
-          const i = R / 100 / 12;
-
-          let M = (P * ((1 + i) ** n - 1) * (1 + i)) / i;
-
-          M = Math.ceil(M);
-
-          const totalInvestment = P * n;
-          const totalReturns = M - totalInvestment;
-          const totalValue = M;
-
-          setSipResult({
-            totalInvestment,
-            totalReturns,
-            totalValue,
-          });
-        },
-        300
-      ),
-    []
+  const calculateAndSetResult = useMemo(
+    () => (investment: number, returnRate: number, duration: number) => {
+      if (mode === "sip") {
+        const result = calculateSIP(investment, returnRate, duration);
+        setResult(result);
+      }
+      if (mode === "lumpsum") {
+        const result = calculateLumpsum(investment, returnRate, duration);
+        setResult(result);
+      }
+    },
+    [mode]
   );
-
-  useEffect(() => {
-    calculateSipResult(monthlyInvestment, returnRate, duration);
-    return () => calculateSipResult.cancel();
-  }, [duration, returnRate, monthlyInvestment]);
 
   return (
     <div className={styles.form_wrapper}>
+      <div className={styles.form_header}>
+        <Switcher handleChange={handleModeChange} mode={mode} />
+        {/* <NiftyStats /> */}
+        <h6>Good Evening!</h6>
+      </div>
       <div className={styles.form}>
         <div className={styles.form_container}>
           <UserValueForm
-            labelName={"Monthly investment"}
+            labelName={
+              mode === "sip" ? "Monthly Investment" : "Total Investment"
+            }
             min={100}
-            max={1000000}
+            max={mode === "sip" ? 1000000 : 100000000}
             step={50}
             prefix="₹"
-            handleChange={handleMonthlyInvestmentChange}
-            value={monthlyInvestment}
+            handleChange={handleInvestmentChange}
+            value={investment}
           />
           <UserValueForm
             labelName={"Expected Return Rate"}
@@ -103,9 +102,11 @@ export const FormContainer = () => {
             value={duration}
           />
         </div>
-        <StatChart data={sipResult} />
+        <div>
+          <StatChart data={result} />
+        </div>
       </div>
-      <InvestmentStatsCard {...sipResult} />
+      <InvestmentStatsCard {...result} />
     </div>
   );
 };
