@@ -8,7 +8,6 @@ import UserValueForm from "../userValueForm/UserValueForm";
 import calculateSIP from "@/utils/calculateSIP";
 import Switcher from "@/components/ui/switcher/Switcher";
 import { calculateLumpsum } from "@/utils/calculateLumpsum";
-import { NiftyStats } from "../niftyStats/NiftyStats";
 
 export type InvestmentStatsType = {
   totalInvestment: number;
@@ -17,6 +16,7 @@ export type InvestmentStatsType = {
 };
 
 export const FormContainer = () => {
+  const hours = new Date().getHours();
   const [mode, setMode] = useState<string>("sip");
   const [investment, setInvestment] = useState<number>(5000);
   const [returnRate, setReturnRate] = useState<number>(12);
@@ -63,12 +63,21 @@ export const FormContainer = () => {
     [mode]
   );
 
+  useEffect(() => {
+    calculateAndSetResult(investment, returnRate, duration);
+  }, [mode]);
+
   return (
     <div className={styles.form_wrapper}>
       <div className={styles.form_header}>
         <Switcher handleChange={handleModeChange} mode={mode} />
-        {/* <NiftyStats /> */}
-        <h6>Good Evening!</h6>
+        <h6>
+          {hours < 12
+            ? "Good morning!"
+            : hours < 18
+            ? "Good afternoon!"
+            : "Good evening!"}
+        </h6>
       </div>
       <div className={styles.form}>
         <div className={styles.form_container}>
