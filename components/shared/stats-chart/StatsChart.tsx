@@ -26,7 +26,7 @@ const StatsChart = ({ data }: StatChartProp) => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "300px" }}>
       <Doughnut data={chartData} />
     </div>
   );
